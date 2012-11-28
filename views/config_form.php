@@ -2,7 +2,7 @@
 $fields = array(
 	array(
 		'label' => 'Host (LDAP Server)',
-		'name' => 'ldap_server',
+		'name' => 'ldap_host',
 		'required' => true
 	),
 	array(
@@ -12,7 +12,12 @@ $fields = array(
 	),
 	array(
 		'label' => 'Base DN',
-		'name' => 'ldap_basedn',
+		'name' => 'ldap_baseDn',
+		'required' => false
+	),
+	array(
+		'label' => 'Account Canonical Form',
+		'name' => 'ldap_accountCanonicalForm',
 		'required' => false
 	),
 	array(
@@ -48,7 +53,6 @@ foreach ($fields as $row): ?>
 
 <?php
 	$selects = array(
-		'Account Uses Canonical Form' => 'ldap_accountCanonicalForm',
 		'Bind Requires DN' => 'ldap_bindRequiresDn'
 	);
 
