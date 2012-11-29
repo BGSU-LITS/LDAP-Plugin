@@ -149,7 +149,7 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 			'action' => 'forgot-password'
 		);
 
-		return $whirtelist;
+		return $whitelist;
 	}
 
 }
