@@ -16,7 +16,7 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 	/**
 	 * @var array  The filters used in this plugin.
 	 */
-	protected $_filters = array('login_adapter');
+	protected $_filters = array('login_adapter', 'admin_whitelist');
 
 	/**
 	 * @var array  Options that are used in the ldap plugin.
@@ -133,6 +133,23 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 		require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'LdapAuthAdapter.php';
 		$ldap_adapter = new LdapAuthAdapter(array('ldap' => $ldap), $user, $password);
 		return $ldap_adapter;
+	}
+
+	/**
+	 * Adds the forgot password page to the admin whitelist.
+	 *
+	 * @param  array $whitelist The current whitelist
+	 * @return array
+	 */
+	public function filterAdminWhitelist($whitelist)
+	{
+		$whitelist[] = array(
+			'module' => 'ldap',
+			'controller' => 'users',
+			'action' => 'forgot-password'
+		);
+
+		return $whirtelist;
 	}
 
 }
