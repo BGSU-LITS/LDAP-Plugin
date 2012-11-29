@@ -13,11 +13,11 @@ require_once CONTROLLER_DIR.'/UsersController.php';
 class Ldap_UsersController extends UsersController
 {
 	/**
-	 * Handles the Forgot Password page.
+	 * Since we are using a LDAP system the password can't be changed through Omeka
 	 */
 	public function forgotPasswordAction()
 	{
-		var_dump('forgot password holmes!'); die;
+		return;
 	}
 
 	/**
