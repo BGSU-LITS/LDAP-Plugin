@@ -10,12 +10,13 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 	/**
 	 * @var array  All of the hooks used in the LDAP plugin
 	 */
-	protected $_hooks = array('install', 'config', 'config_form', 'uninstall');
+	protected $_hooks = array('install', 'config', 'config_form', 'uninstall',
+		'define_routes');
 
 	/**
 	 * @var array  The filters used in this plugin.
 	 */
-	protected $_filters = array('login_adapter','admin_whitelist');
+	protected $_filters = array('login_adapter');
 
 	/**
 	 * @var array  Options that are used in the ldap plugin.
@@ -67,6 +68,46 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 	}
 
 	/**
+	 * Add some routes to the flow to override the default user actions.
+	 *
+	 * @param  array $args  The route arguments
+	 * @return [type] [description]
+	 */
+	public function hookDefineRoutes($args)
+	{
+		$router = $args['router'];
+
+		$routes = array(
+			array(
+				'name' => 'ldap_forgot',
+				'pattern' => 'users/forgot-password',
+				'action' => 'forgot-password'
+			),
+			array(
+				'name' => 'ldap_add',
+				'pattern' => 'users/add',
+				'action' => 'add'
+			),
+			array(
+				'name' => 'ldap_edit',
+				'pattern' => 'users/edit/:id',
+				'action' => 'edit'
+			)
+		);
+
+		foreach ($routes as $route)
+		{
+			$r = new Zend_Controller_Router_Route($route['pattern'], array(
+				'module' => 'ldap',
+				'controller' => 'users',
+				'action' => $route['action']
+			));
+
+			$router->addRoute($route['name'], $r);
+		}
+	}
+
+	/**
 	 * Bypasses the normal login functionality and checks the LDAP server
 	 * to authenticate the user.
 	 *
@@ -87,27 +128,11 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 		}
 
 		/**
-		 * THe auth adapter should be autoloaded, but I'm not that familiar with Zend...
+		 * The auth adapter should be autoloaded, but I'm not that familiar with Zend...
 		 */
 		require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'LdapAuthAdapter.php';
 		$ldap_adapter = new LdapAuthAdapter(array('ldap' => $ldap), $user, $password);
 		return $ldap_adapter;
-	}
-
-	/**
-	 * Adds some pages to the administration whitelist
-	 *
-	 * @param  array $list  The current whitelist
-	 * @return array        An updated whitelist
-	 */
-	public function filterAdminWhitelist($list)
-	{
-		$list[] = array(
-			'controller' => 'ldap',
-			'action' => 'forgot-password'
-		);
-
-		return $list;
 	}
 
 }
