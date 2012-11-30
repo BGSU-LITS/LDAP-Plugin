@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Omeka Plugin - LDAP" default="package" basedir=".">
+	<property name="version" value="0.3.0" />
+
+	<target name="package">
+		<property name="file" value="${project.basedir}/package/Ldap-${version}.zip" />
+
+		<delete file="${file}" />
+
+		<zip destfile="${file}">
+			<fileset dir="${project.basedir}/">
+				<exclude name="package/**" />
+				<exclude name="build.xml" />
+				<exclude name=".DS_Store" />
+				<exclude name=".git/**" />
+				<exclude name=".gitignore" />
+			</fileset>
+		</zip>
+	</target>
+</project>
