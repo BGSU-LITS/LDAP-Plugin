@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Omeka Plugin - LDAP" default="package" basedir=".">
-	<property name="version" value="0.3.0" />
+	<property name="version" value="0.3.1" />
 
-	<target name="package">
+	<target name="package" description="Package the files for distribution">
 		<property name="file" value="${project.basedir}/package/Ldap-${version}.zip" />
 
 		<delete file="${file}" />
@@ -16,5 +16,24 @@
 				<exclude name=".gitignore" />
 			</fileset>
 		</zip>
+	</target>
+
+	<target name="transfer" description="Moves the plugin over to the Omeka install">
+		<resolvepath propertyName="path" file="${project.basedir}/../../../omeka/plugins/Ldap/" />
+		<phingcall target="rsync">
+			<property name="path" value="${path}" />
+		</phingcall>
+	</target>
+
+	<target name="rsync">
+		<exec executable="rsync" passthru="true" checkreturn="true" escape="false">
+			<arg value="-rvzu" />
+			<arg value="${project.basedir}/" />
+			<arg value="${path}/" />
+			<arg value="--exclude=build.xml" />
+			<arg value="--exclude=.git*" />
+			<arg value="--exclude=.DS_Store" />
+			<arg value="--exclude=/package" />
+		</exec>
 	</target>
 </project>
