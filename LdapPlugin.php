@@ -29,7 +29,9 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 		'ldap_accountFilterFormat' => "",
 		'ldap_accountDomainName' => "",
 		'ldap_accountDomainNameShort' => "",
-		'ldap_bindRequiresDn' => 1
+		'ldap_bindRequiresDn' => 1,
+		'ldap_username' => '',
+		'ldap_password' => ''
 	);
 
 	/**
@@ -132,6 +134,7 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 		 */
 		require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'LdapAuthAdapter.php';
 		$ldap_adapter = new LdapAuthAdapter(array('ldap' => $ldap), $user, $password);
+		
 		return $ldap_adapter;
 	}
 
