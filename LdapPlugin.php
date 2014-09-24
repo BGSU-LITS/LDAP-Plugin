@@ -26,9 +26,9 @@ class LdapPlugin extends Omeka_Plugin_AbstractPlugin
 		'ldap_port' => 389,
 		'ldap_baseDn' => "",
 		'ldap_accountCanonicalForm' => 1,
-		'ldap_accountFilterFormat' => "",
-		'ldap_accountDomainName' => "",
-		'ldap_accountDomainNameShort' => "",
+		'ldap_accountFilterFormat' => '',
+		'ldap_accountDomainName' => '',
+		'ldap_accountDomainNameShort' => '',
 		'ldap_bindRequiresDn' => 1,
 		'ldap_username' => '',
 		'ldap_password' => ''

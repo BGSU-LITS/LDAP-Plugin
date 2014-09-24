@@ -28,8 +28,8 @@ class Ldap_UsersController extends UsersController
 		$user = new User();
 
 		$form = $this->_getUserForm($user);
-		$form->setSubmitButtonText(__('Add User'));
 		$this->view->form = $form;
+		$this->view->user = $user;
 
 		if ($this->getRequest()->isPost() && $form->isValid($_POST))
 		{
@@ -63,7 +63,6 @@ class Ldap_UsersController extends UsersController
 		$this->view->user = $user;
 
 		$form = $this->_getUserForm($user);
-		$form->setSubmitButtonText(__('Save Changes'));
 
 		if ($this->getRequest()->isPost())
 		{

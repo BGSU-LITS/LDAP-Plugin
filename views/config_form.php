@@ -86,8 +86,8 @@ foreach ($selects as $label => $name): ?>
 	<div class="inputs five columns omega">
 		<select name="<?php echo $name; ?>" id="<?php echo $name; ?>">
 			<?php $value = (int)get_option($name); ?>
-			<option value="1"<?php if ($value === 1){ echo ' selected'; } ?>>True</option>
-			<option value="0"<?php if ($value === 0){ echo ' selected'; } ?>>False</option>
+			<option value="1"<?php if ($value === 1){ echo ' selected'; } ?>>Yes</option>
+			<option value="0"<?php if ($value === 0){ echo ' selected'; } ?>>No</option>
 		</select>
 	</div>
 </div>
