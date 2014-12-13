@@ -1,6 +1,6 @@
 # LDAP Omeka Plugin
 
-An LDAP plugin for Omeka version 2.0+
+An LDAP plugin for Omeka version 2.2.2+
 
 ------
 
