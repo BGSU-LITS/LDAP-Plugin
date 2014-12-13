@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Omeka Plugin - LDAP" default="package" basedir=".">
-	<property name="version" value="0.3.1" />
+	<property name="version" value="0.4.0" />
 
 	<target name="package" description="Package the files for distribution">
 		<property name="file" value="${project.basedir}/package/Ldap-${version}.zip" />
